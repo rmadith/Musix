@@ -1,0 +1,7 @@
+{
+  "access_token": "BQCzhNzRevbLpJfRUxmRZICKKuyg9F49UaDIAOuw3Yyp3Sxw6eo3j2Uw5y8tRLatiDRdwKrYEldD9OvyPHnXx5Uj9C-E9OOlSdWcvwHBifQEDuZ-wIJW3PKT57Xu148AHY_dov0mHUKyz39RsQloDScA_DMQbpSzHGoTtBsup3f2V4j89TNCbt8h3C-g7PdkuJhkZGdoP8w-OQ8790qG5AW-ZkNlhLz2LzY9TxuPQQ",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "AQAmh8kdQAPAiG0MTbHGexyBbHjR-S3zlcM63pqcyWfU-9apjbQdkDA0WMiOVQA6DGQ76Msf2E6Dq3eEANTxX72YFtHb4NSuTxKIarGFn1H0j2z4NY2Qu5WltZAYZ7QSGTU",
+  "scope": "playlist-read-private streaming app-remote-control playlist-read-collaborative user-modify-playback-state user-library-read user-read-playback-state user-read-email user-read-private"
+}
