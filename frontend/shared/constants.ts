@@ -59,5 +59,5 @@ export const scopes = [
   'user-read-playback-state'
 ]
 
-export const redirectUri = 'http://localhost:3000/api/callback'
+export const redirectUri = 'http://localhost:3000/login'
 export const clientId = '1a1b5b6ffcd84abe970e58d7524b24ce'
