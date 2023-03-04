@@ -42,10 +42,12 @@ def login():
 
     tokens = r.json()
 
-    session.clear()
+    print(tokens)
 
     res = Spotify.getme(tokens['access_token'])
 
     print(res)
+    session.clear()
+
 
     return {"hello":"world"}
