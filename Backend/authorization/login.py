@@ -1,10 +1,13 @@
-from flask import (Blueprint, request, json)
+from flask import (Blueprint, request, json, session)
 
 import os
 import requests
 import base64
 import json
 from secrets import *
+
+from API import Spotify
+
 
 bp = Blueprint('login', __name__, url_prefix='/auth')
 
@@ -39,6 +42,10 @@ def login():
 
     tokens = r.json()
 
-    print(code, tokens)
+    session.clear()
+
+    res = Spotify.getme(tokens['access_token'])
+
+    print(res)
 
     return {"hello":"world"}
