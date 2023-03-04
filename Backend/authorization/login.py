@@ -36,7 +36,7 @@ def login():
     headers['Authorization'] = f"Basic {base64_message}"
     data['grant_type'] = 'authorization_code'
     data['code'] = code
-    data['redirect_uri'] = 'http://localhost:3000/api/callback'
+    data['redirect_uri'] = 'http://64.33.187.77:8000'
 
     r = requests.post(url, headers=headers, data=data)
 
