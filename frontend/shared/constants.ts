@@ -56,7 +56,9 @@ export const scopes = [
   'user-library-read',
   'playlist-read-private',
   'playlist-read-collaborative',
-  'user-read-playback-state'
+  'user-read-playback-state',
+  'user-read-private',
+  'user-read-email'
 ]
 
 export const redirectUri = 'http://localhost:3000/login'
