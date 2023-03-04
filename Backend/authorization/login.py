@@ -6,7 +6,7 @@ import base64
 import json
 from secrets import *
 
-from API import Spotify
+from . import Spotify
 
 
 bp = Blueprint('login', __name__, url_prefix='/auth')
