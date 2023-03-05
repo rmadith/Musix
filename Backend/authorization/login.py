@@ -66,6 +66,7 @@ def login():
         'refresh_token': tokens['refresh_token']
     }
 
+    print(data)
 
 
     api_r = requests.post(api_url, data=data)
