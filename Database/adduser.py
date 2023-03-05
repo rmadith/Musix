@@ -29,6 +29,7 @@ def createsession():
     try:
         x = mongo.createsession(data["host_id"], data["type_id"])
         testid = mongo.getUser(data["host_id"])
+        print(testid)
         y = mongo.addUserToSession(x, data["host_id"], testid["access_token"], testid["refresh_token"])
         return {"id": str(x)}
     except:
