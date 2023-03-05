@@ -121,7 +121,7 @@ def getUser():
     data = request.json
     try:
         x = mongo.getUser(data["user_id"])
-        return json.dumps(x)
+        return x
     except Exception as e:
         return {"id": str(e)}
     

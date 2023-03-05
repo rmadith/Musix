@@ -49,15 +49,15 @@ def joinSession():
     }
     url_2 = "http://64.33.187.77:8000/db/get-user"
     response_2 = requests.request("POST", url_2, headers=headers, data=payload)
-    print(response_2.json())
-    email = response_2.json()['email']
     hashednotifications[data['sessionId']].append(email)
     try:
         response = requests.request("PUT", url, headers=headers, data=payload)
+        response_name = response.json()['creatorName']
+        response_theme = response.json()['theme']
     except:
         return "Error", 400
     
-    return json.dumps(response), 200
+    return json.dumps({"creatorName":response_name, "themeId":response_theme }), 200
 
 @bp.route('/delete-session', methods=['DELETE'])
 def deleteSession():
