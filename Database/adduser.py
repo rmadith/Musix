@@ -87,6 +87,8 @@ def addUserToSession():
             print(trackId)
             print(image)
             print(supremeHash)
+            if supremeHash[str(data["session_id"])] == None:
+                supremeHash[str(data["session_id"])] = HashedQueue.HashedQueue()
             supremeHash[str(data["session_id"])].add(Song.Song(name, trackId, image,0))
         
         print("returning")
