@@ -1,10 +1,12 @@
-from flask import (Blueprint, request, json, session)
+from flask import (Blueprint, request, json, session, make_response, render_template)
 
 import os
 import requests
 import base64
 import json
 from secrets import *
+import datetime
+
 
 from . import Spotify
 
@@ -27,16 +29,19 @@ def login():
     headers = {}
     data = {}   
 
+
     # Encode as Base64
     message = f"{client_id}:{client_secret}"
     message_bytes = message.encode('ascii')
     base64_bytes = base64.b64encode(message_bytes)
     base64_message = base64_bytes.decode('ascii')
 
-    headers['Authorization'] = f"Basic {base64_message}"
+    headers['Authorization'] = f"Basic {str(base64_message)}"
+    headers['Content-Type'] = 'application/x-www-form-urlencoded'
+
     data['grant_type'] = 'authorization_code'
     data['code'] = code
-    data['redirect_uri'] = 'http://64.33.187.77:8000'
+    data['redirect_uri'] = 'http://localhost:3000/login'
 
     r = requests.post(url, headers=headers, data=data)
 
@@ -44,10 +49,22 @@ def login():
 
     print(tokens)
 
-    res = Spotify.getme(tokens['access_token'])
+    access_token = tokens['access_token']
+
+    res = Spotify.getme(access_token)
 
     print(res)
-    session.clear()
 
+    user = res
 
-    return {"hello":"world"}
+    # session.clear()
+    # session['domain'] = "localhost:3000"
+    # session["user_email"] = user["email"]
+
+    expire_date = datetime.datetime.now()
+    expire_date = expire_date + datetime.timedelta(days=90)
+
+    resp = make_response()
+    resp.set_cookie('somecookiename', 'I am cookie', domain="127.0.0.1:3000", secure=False, httponly=True, samesite="None", expires=expire_date)
+
+    return resp
