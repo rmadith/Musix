@@ -50,7 +50,11 @@ def createsession():
         print(playlist)
         for song in playlist["tracks"]["items"]:
             print("Hello")
-            supremeHash[str(x)].add(Song.Song(song["track"]["album"]["name"], song["track"]["album"]["uri"], song["track"]["album"]["images"][0]["url"]), 0)
+            name = song["track"]["album"]["name"]
+            trackId = song["track"]["album"]["uri"]
+            image = song["track"]["album"]["images"][0]["url"]
+            print(name, trackId, image)
+            supremeHash[str(x)].add(Song.Song(name, trackId, image,0))
         t1 = threading.Thread(target=enqueue(), args=(str(x), y["access_token"],))
         t1.start()
         return {"id": str(x)}
