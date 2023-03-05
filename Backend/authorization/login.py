@@ -6,11 +6,10 @@ import requests
 import base64
 import json
 from secrets import *
+import sys
 
-from flask_cors import CORS,cross_origin
-from . import Spotify
 
-import uuid
+sys.path.insert(0, "/home/muthu/Musix/Backend/authorization")
 
 bp = Blueprint('login', __name__, url_prefix='/auth')
 
