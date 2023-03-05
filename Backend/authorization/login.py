@@ -119,7 +119,6 @@ def login():
 
     response_3 = requests.request("POST", url, headers=headers, data=data)
 
-
     user_object = {
         'id': response.json()['id'],
         'name': user['display_name'],
