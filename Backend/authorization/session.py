@@ -49,11 +49,14 @@ def joinSession():
     }
     url_2 = "http://64.33.187.77:8000/db/get-user"
     response_2 = requests.request("POST", url_2, headers=headers, data=payload)
-    hashednotifications[data['sessionId']].append(email)
     try:
         response = requests.request("PUT", url, headers=headers, data=payload)
         response_name = response.json()['creatorName']
         response_theme = response.json()['theme']
+        try:
+            hashednotifications[data['sessionId']].append(response_name)
+        except:
+            hashednotifications[data['sessionId']] = []
     except:
         return "Error", 400
     
