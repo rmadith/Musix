@@ -13,7 +13,7 @@ from . import Spotify
 
 bp = Blueprint('login', __name__, url_prefix='/auth')
 
-@bp.route('/login', methods=['POST'])
+@bp.route('/login', methods=['POST'], supports_credentials=True, headers=['Content-Type', 'Authorization'], origin='javin.jmsgvn.com')
 def login():
 
     data = request.json
