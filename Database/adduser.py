@@ -120,6 +120,7 @@ def getAuth():
 def enqueue(args, auth):
     while(1):
         for i in range(1,5):
+            print(supremeHash[str(args)])
             Song = supremeHash[str(args)].pop()
             Spotify.addtoQueue(auth, Song.trackId)
         time.sleep(60)
