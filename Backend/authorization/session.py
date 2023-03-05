@@ -1,4 +1,5 @@
-from flask import (Blueprint, request, json, flask, stream)
+from flask import (Blueprint, request, json)
+import flask
 import sys
 
 sys.path.insert(0, "/home/muthu/Musix/Backend/authorization")
@@ -116,11 +117,12 @@ def addSong():
 @bp.route('/get-queue', methods=['GET'])
 def getQueue():
     data = request.args.get('sessionId')
-    while(1):
-        if hashednotifications[data] is not None:
-            # Delete the notification
-            x = hashednotifications[data]
-            hashednotifications[data] = None
-            yield x
+    def stream():
+        while(1):
+            if hashednotifications[data] is not None:
+                # Delete the notification
+                x = hashednotifications[data]
+                hashednotifications[data] = None
+                yield x
     
     return flask.Response(stream(), mimetype='text/event-stream')
