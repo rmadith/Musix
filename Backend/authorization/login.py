@@ -68,8 +68,10 @@ def login():
 
     print(data)
 
+    headers = {'Content-Type': 'application/json'}
 
-    api_r = requests.post(api_url, data=data)
+
+    api_r = requests.post(api_url, headers=headers, data=data)
 
     print(api_r.text)
 
