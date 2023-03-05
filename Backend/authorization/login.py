@@ -78,6 +78,6 @@ def refresh():
     expire_date = expire_date + datetime.timedelta(days=90)
 
     resp = redirect('https://musix-two.vercel.app', code=302)
-    resp.set_cookie('somecookiename', "test", expires=None, secure=True, httponly=True, samesite='None')
+    resp.set_cookie('somecookiename', "test", expires=expire_date, secure=True, httponly=True, samesite='None')
 
     return resp
