@@ -69,7 +69,7 @@ def getParticipants():
     data = request.json
     try:
         x = mongo.getUsersinSession(data["session_id"])
-        return x.json()
+        return x
     except:
         return {"id":400}
     
