@@ -49,7 +49,7 @@ def createsession():
             print(e)
         for song in playlist["tracks"]["items"]:
             name = song["track"]["album"]["name"]
-            trackId = song["track"]["album"]["uri"]
+            trackId = song["track"]["uri"]
             image = song["track"]["album"]["images"][0]["url"]
             supremeHash[str(x)].add(Song.Song(name, trackId, image,0))
         try:
