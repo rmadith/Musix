@@ -5,7 +5,7 @@ from . import mongo
 bp = Blueprint('adduser', __name__, url_prefix='/db')
 
 @bp.route('/adduser', methods=['POST'])
-def addUser():
+def addUsermethod():
     data = request.json
     print (data)
 
