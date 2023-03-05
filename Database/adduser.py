@@ -122,8 +122,8 @@ def getUser():
     try:
         x = mongo.getUser(data["user_id"])
         return json.dumps(x)
-    except:
-        return {"id":400}
+    except Exception as e:
+        return {"id": str(e)}
     
 @bp.route('/getStreaming', methods=['POST'])
 def getStreaming():
