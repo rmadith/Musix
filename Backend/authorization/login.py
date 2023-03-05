@@ -10,11 +10,11 @@ import datetime
 from flask_cors import CORS,cross_origin
 from . import Spotify
 
+import uuid
 
 bp = Blueprint('login', __name__, url_prefix='/auth')
 
 @bp.route('/login', methods=['POST'])
-@cross_origin()
 def login():
 
     data = request.json
@@ -58,26 +58,14 @@ def login():
 
     user = res
 
-    # session.clear()
-    # session['domain'] = "localhost:3000"
-    # session["user_email"] = user["email"]
+    user_object = {
+        'id': uuid.uuid1(),
+        'name': user['display_name'],
+        'email': user['email'],
+        'activeSession': [],
+        'topArtists': [],
+        'topTracks': [],
+        'streaming': False
+    }
 
-    expire_date = datetime.datetime.now()
-    expire_date = expire_date + datetime.timedelta(days=90)
-
-    resp = make_response()
-    resp.set_cookie('somecookiename', "test", expires=None, secure=True, httponly=True, samesite='None')
-
-    return resp
-
-@bp.route('/refresh', methods=['GET'])
-@cross_origin()
-def refresh():
-
-    expire_date = datetime.datetime.now()
-    expire_date = expire_date + datetime.timedelta(days=90)
-
-    resp = redirect('https://musix-two.vercel.app', code=302)
-    resp.set_cookie('somecookiename', "test", expires=expire_date, secure=True, httponly=True, samesite='None')
-
-    return resp
+    return user_object
