@@ -44,8 +44,8 @@ def addUserToSession(session_id, user_id):
         host = getUser(hostid)["name"]
         # Add the user to the array
         users[user_id] = True
-        print(users)
         user = getUser(user_id)
+        print(user)
         user["activeSessions"][session_id] = True
         print("Bye")
         getDB()["User"].update_one({"_id": ObjectId(user_id)}, {"$set": {"activeSessions": user["activeSessions"]}})
