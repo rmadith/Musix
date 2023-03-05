@@ -7,10 +7,8 @@ bp = Blueprint('adduser', __name__, url_prefix='/db')
 @bp.route('/adduser', methods=['POST'])
 def addUsermethod():
     data = request.json
-    print (data)
     try:
         x = mongo.addUser(data["email"], data["access_token"], data["refresh_token"])
-        print(x)
         return {"id": str(x)}
     except:
         return {"id":400}
@@ -19,12 +17,59 @@ def addUsermethod():
 @bp.route('/getUserSession', methods=['POST'])
 def getUserSession():
     data = request.json
-    print (data)
     try:
         x = mongo.getUserSession(data["id"])
-        print(x)
         return x
     except:
         return {"id":400}
     
+@bp.route('/createsession', methods=['POST'])
+def createsession():
+    data = request.json
+    try:
+        x = mongo.createSession(data["host_id"], data["type_id"])
+        y = mongo.addUserToSession(x, data["host_id"], data["access_token"], data["refresh_token"])
+        return {"id": str(x)}
+    except:
+        return {"id":400}
+    
+    
+@bp.route('/addUserToSession', methods=['PUT'])
+def addUserToSession():
+    data = request.json
+    try:
+        x = mongo.addUserToSession(data["session_id"], data["user_id"])
+        return {"id": str(x)}
+    except:
+        return {"id":400}
+    
+
+@bp.route('/deleteSession', methods=['DELETE'])
+def deleteSession():
+    data = request.json
+    try:
+        x = mongo.deleteSession(data["session_id"])
+        return {"id": str(x)}
+    except:
+        return {"id":400}
+
+@bp.route('/deleteUserFromSession', methods=['DELETE'])
+def deleteUserFromSession():
+    data = request.json
+    try:
+        x = mongo.deleteUserFromSession(data["session_id"], data["user_id"])
+        return {"id": str(x)}
+    except:
+        return {"id":400}
+    
+@bp.route('/get-participants', methods=['GET'])
+def getParticipants():
+    data = request.json
+    try:
+        x = mongo.getParticipants(data["session_id"])
+        return x
+    except:
+        return {"id":400}
+    
+
     

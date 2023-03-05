@@ -1,4 +1,4 @@
-from flask import (Blueprint, request, json, session, make_response, render_template, redirect)
+from flask import (Blueprint, request, json)
 
 import os
 import requests
@@ -112,10 +112,6 @@ def login():
     }
 
     response = requests.request("POST", url, headers=headers, data=payload)
-
-
-
-    print(response.text)
 
     user_object = {
         'id': response.json()['id'],

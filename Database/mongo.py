@@ -2,6 +2,7 @@
 Python Wrapper to handle sessions with MongoDB
 """
 
+import json
 from pymongo import MongoClient
 
 def getDB():
@@ -12,30 +13,29 @@ def getDB():
     db = client['Musix']
     return db
 
-def createsession(host_id):
+def createsession(host_id, type):
     """
     Creates a session with MongoDB
     Returns the new session ID
     """
     session_collection = getDB()["Session"]
-    session_sample_document = {"users": {}, "host": host_id}
+    session_sample_document = {"users": {}, "host": host_id, "type": type}
     new_document = session_collection.insert_one(session_sample_document)
     return new_document.inserted_id
 
-def addUserToSession(session_id, user_id, access_token, refresh_token):
+def addUserToSession(session_id, user_id):
     """
     Adds a user to a session
     """
-    try:
-        # Check if the user is the host
-        if user_id == session_collection.find_one({"_id": session_id})["host"]:
-            return False
-            
+    try:    
         session_collection = getDB()["Session"]
         # Get the users array
         users = session_collection.find_one({"_id": session_id})["users"]
         # Add the user to the array
-        users[user_id] = {"access_token": access_token, "refresh_token": refresh_token}
+        users[user_id] = True
+        user = getDB()["User"].find_one({"_id": user_id})
+        user["activeSessions"][session_id] = True
+        getDB()["User"].update_one({"_id": user_id}, {"$set": {"activeSessions": user["activeSessions"]}})
         session_collection.update_one({"_id": session_id}, {"$set": {"users": users}})
         return True
     except:
@@ -51,6 +51,9 @@ def deleteUserFromSession(session_id, user_id):
         users = session_collection.find_one({"_id": session_id})["users"]
         # Delete the user from the array
         del users[user_id]
+        user = getDB()["User"].find_one({"_id": user_id})
+        del user["activeSessions"][session_id]
+        getDB()["User"].update_one({"_id": user_id}, {"$set": {"activeSessions": user["activeSessions"]}})
         session_collection.update_one({"_id": session_id}, {"$set": {"users": users}})
         return True
     except:
@@ -88,6 +91,17 @@ def getUser(id):
     Gets a user from the database
     """
     return getDB()["User"].find_one({"_id": id})
+
+def getUsersinSession(session_id):
+    """
+    Gets all the users in a session
+    """
+    x = getDB()["Session"].find_one({"_id": session_id})["users"]
+    y = []
+    for i in x:
+        y.append(getUser(i))
+    return json.dumps(y)
+
 
 
     
