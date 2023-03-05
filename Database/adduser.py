@@ -1,9 +1,19 @@
 import json
+import sys
+import time
+
+sys.path.insert(0, "/home/muthu/Musix/Algorithm")
+import HashedQueue
+import Song
+import Spotify
+import threading
 from flask import (Blueprint, request)
 
 from . import mongo
 
 bp = Blueprint('adduser', __name__, url_prefix='/db')
+
+supremeHash = {}
 
 @bp.route('/adduser', methods=['POST'])
 def addUsermethod():
@@ -29,9 +39,14 @@ def createsession():
     data = request.json
     try:
         x = mongo.createsession(data["host_id"], data["type_id"])
-        testid = mongo.getUser(data["host_id"])
-        print(testid)
         y = mongo.addUserToSession(x, data["host_id"])
+        supremeHash[str(x)] = HashedQueue.HashedQueue()
+        playlist = Spotify.getplaylist( y["access_token"], data["type_id"])
+
+        for song in playlist["tracks"]["items"]:
+            supremeHash[str(x)].add(Song.Song(song["track"]["album"]["name"], song["track"]["album"]["uri"], song["track"]["album"]["images"][0]["url"]))
+        t1 = threading.Thread(target=enqueue(), args=(str(x), y["access_token"],))
+        t1.start()
         return {"id": str(x)}
     except:
         return {"id":400}
@@ -42,6 +57,10 @@ def addUserToSession():
     data = request.json
     try:
         x = mongo.addUserToSession(data["session_id"], data["user_id"])
+        y = mongo.addUserToSession(x, data["user_id"])
+        playlist = Spotify.getplaylist( y["access_token"], data["type_id"])
+        for i in playlist["tracks"]["items"]:
+            supremeHash[str(data["session_id"])].add(Song.Song(i["track"]["album"]["name"], i["track"]["album"]["uri"], i["track"]["album"]["images"][0]["url"]))
         return {"id": str(x)}
     except:
         return {"id":400}
@@ -85,4 +104,10 @@ def getAuth():
         return {"id":400}
     
 
-    
+
+def enqueue(args, auth):
+    while(1):
+        for i in range(1,5):
+            Song = supremeHash[str(args)].pop()
+            Spotify.addtoQueue(auth, Song.trackId)
+        time.sleep(60)

@@ -104,7 +104,7 @@ def addtoQueue(authcode:str, trackID:str):
 		"Accept": "application/json"
 	}
 
-	r = requests.post("https://api.spotify.com/v1/me/player/queue?uri=spotify:track:"+trackID, headers=headers)
+	r = requests.post("https://api.spotify.com/v1/me/player/queue?uri="+trackID, headers=headers)
 
 	if r.status_code == 204:
 		return True
