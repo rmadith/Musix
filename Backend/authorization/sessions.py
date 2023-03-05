@@ -4,7 +4,7 @@ import sys
 sys.path.insert(0, "/home/muthu/Musix/Backend/authorization")
 import requests
 
-bp = Blueprint('session', __name__, url_prefix='/sessions')
+bp = Blueprint('session', __name__, url_prefix='/session')
 
 
 @bp.route('/create-session', methods=['POST'])
@@ -26,7 +26,7 @@ def createsession():
     except:
         return "Error", 400
 
-    return "Success", 200
+    return response.json(), 200
 
 @bp.route('/join-session', methods=['PUT'])
 def joinSession():

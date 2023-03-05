@@ -13,8 +13,10 @@ def create_app():
     )
 
     from . import login
+    from . import session
 
     app.register_blueprint(login.bp)
+    app.register_blueprint(session.bp)
 
     CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
     return app
