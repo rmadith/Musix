@@ -10,6 +10,7 @@ def addUser():
     try:
         print (data)
         x = mongo.addUser(data['email'], data['access_token'], data['refresh_token'])
+        print(x)
         return {"id": x}
     except:
         return 400
