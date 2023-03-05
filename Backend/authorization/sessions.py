@@ -2,9 +2,7 @@ from flask import (Blueprint, request, json)
 import sys
 
 sys.path.insert(0, "/home/muthu/Musix/Backend/authorization")
-import Spotify
 import requests
-
 
 bp = Blueprint('session', __name__, url_prefix='/sessions')
 
@@ -67,7 +65,7 @@ def deleteSession():
         return "Error", 400
     return "Success", 200
 
-@bp.route('leave-session', methods=['DELETE'])
+@bp.route('/leave-session', methods=['DELETE'])
 def leaveSession():
     data = request.json
     url = "http://64.33.187.77:8000/db/deleteUserFromSession"

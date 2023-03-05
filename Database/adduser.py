@@ -71,5 +71,14 @@ def getParticipants():
     except:
         return {"id":400}
     
+@bp.route('/get-auth', methods=['POST'])
+def getAuth():
+    data = request.json
+    try:
+        x = mongo.getAuth(data["user_id"])
+        return {"access_token": x}
+    except:
+        return {"id":400}
+    
 
     
