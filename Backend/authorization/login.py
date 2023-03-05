@@ -58,7 +58,7 @@ def login():
 
     user = res
 
-    api_url = "http://64.33.187.77:8000/adduser"
+    api_url = "http://64.33.187.77:8000/db/adduser"
 
     data = {
         'email': user['email'],
