@@ -114,15 +114,14 @@ def addSong():
     trackId = data['trackId']
     sessionId = data['sessionId']
 
-@bp.route('/get-queue', methods=['GET'])
+@bp.route('/socket', methods=['GET'])
 def getQueue():
     data = request.args.get('sessionId')
     def stream():
         while(1):
-            if hashednotifications[data] is not None:
+            if hashednotifications[data] != None or hashednotifications[data] != []:
                 # Delete the notification
-                x = hashednotifications[data]
-                hashednotifications[data] = None
-                yield x
-    
+                for i in hashednotifications[data]:
+                    yield i
+
     return flask.Response(stream(), mimetype='text/event-stream')
