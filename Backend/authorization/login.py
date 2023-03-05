@@ -66,7 +66,7 @@ def login():
     expire_date = expire_date + datetime.timedelta(days=90)
 
     resp = make_response()
-    resp.set_cookie('somecookiename', "test",domain='musix-two.vercel.app', expires=None, secure=True, httponly=True, samesite='None')
+    resp.set_cookie('somecookiename', "test", expires=None, secure=True, httponly=True, samesite='None')
 
     return resp
 
