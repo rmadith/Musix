@@ -64,7 +64,7 @@ def deleteUserFromSession():
     except:
         return {"id":400}
     
-@bp.route('/get-participants', methods=['GET'])
+@bp.route('/get-participants', methods=['POST'])
 def getParticipants():
     data = request.json
     try:

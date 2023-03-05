@@ -93,7 +93,7 @@ def getParticipants():
         'Content-Type': 'application/json'
     }
     try:
-        response = requests.request("GET", url, headers=headers, data=payload)
+        response = requests.request("POST", url, headers=headers, data=payload)
     except:
         return "Error", 400
     
