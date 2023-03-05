@@ -68,7 +68,7 @@ def deleteUserFromSession():
 def getParticipants():
     data = request.json
     try:
-        x = mongo.getParticipants(data["session_id"])
+        x = mongo.getUsersinSession(data["session_id"])
         return x
     except:
         return {"id":400}
