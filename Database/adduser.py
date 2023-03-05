@@ -69,7 +69,11 @@ def getParticipants():
     data = request.json
     try:
         x = mongo.getUsersinSession(data["session_id"])
-        return x
+        y = []
+        for i in x:
+            x[i] = mongo.getUser(i)
+            y.append(x[i]["email"])
+        return {"participants": y}
     except:
         return {"id":400}
     
