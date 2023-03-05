@@ -57,26 +57,24 @@ def login():
     print(res)
 
     user = res
+    url = "http://64.33.187.77:8000/db/adduser"
 
-    api_url = "http://64.33.187.77:8000/db/adduser"
+    payload = json.dumps({
+        'email': user['email'],
+        'access_token': access_token,
+        'refresh_token': tokens['refresh_token']
+    })
 
-    data = {
-        "email": "js",
-        "access_token": "test",
-        "refresh_token": "test"
+    headers = {
+    'Content-Type': 'application/json'
     }
 
-    print(data)
+    response = requests.request("POST", url, headers=headers, data=payload)
 
-    headers = {'Content-Type': 'application/json'}
-
-
-    api_r = requests.post(api_url, headers=headers, data=data)
-
-    print(api_r.text)
+    print(response.text)
 
     user_object = {
-        'id': api_r.json()['id'],
+        'id': response.json()['id'],
         'name': user['display_name'],
         'email': user['email'],
         'activeSessions': [],
