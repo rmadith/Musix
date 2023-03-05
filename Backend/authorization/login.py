@@ -65,6 +65,6 @@ def login():
     expire_date = expire_date + datetime.timedelta(days=90)
 
     resp = make_response()
-    resp.set_cookie('somecookiename', 'I am cookie', secure=False, httponly=True, samesite="None", expires=expire_date)
+    resp.set_cookie('somecookiename', 'I am cookie', expires=expire_date)
 
     return resp
