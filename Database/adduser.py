@@ -84,6 +84,7 @@ def deleteSession():
     data = request.json
     try:
         x = mongo.deleteSession(data["session_id"])
+        supremeHash[str(data["session_id"])].clear()
         return {"id": str(x)}
     except:
         return {"id":400}
