@@ -2,7 +2,7 @@ from flask import (Blueprint, request)
 
 from . import mongo
 
-bp = Blueprint('login', __name__, url_prefix='/')
+bp = Blueprint('login', __name__, url_prefix='/db')
 
 @bp.route('/adduser', methods=['POST'])
 def addUser():
