@@ -113,11 +113,20 @@ def login():
 
     response = requests.request("POST", url, headers=headers, data=payload)
 
+    url = "http://64.33.187.77:8000/db/getUserSession"
+
+    data = json.dumps({
+        'id': response.json()['id']
+    })
+
+    response_3 = requests.request("POST", url, headers=headers, data=data)
+
+
     user_object = {
         'id': response.json()['id'],
         'name': user['display_name'],
         'email': user['email'],
-        'activeSessions': [],
+        'activeSessions': json.loads(response_3.json()),
         'topArtists': top_artists_response,
         'topTracks': top_tracks_response,
         'streaming': False,
