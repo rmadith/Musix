@@ -57,7 +57,7 @@ def joinSession():
     except:
         return "Error", 400
     
-    return json.dumps({"creatorName":response_name, "themeId":response_theme }), 200
+    return json.dumps({"creatorName":response_name, "themeId":response_theme}), 200
 
 @bp.route('/delete-session', methods=['DELETE'])
 def deleteSession():
