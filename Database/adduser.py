@@ -121,7 +121,7 @@ def getUser():
     data = request.json
     try:
         x = mongo.getUser(data["user_id"])
-        return x
+        return json.dumps(x)
     except:
         return {"id":400}
     

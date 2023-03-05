@@ -49,6 +49,7 @@ def joinSession():
     }
     url_2 = "http://64.33.187.77:8000/db/get-user"
     response_2 = requests.request("POST", url_2, headers=headers, data=payload)
+    print(response_2.json())
     email = response_2.json()['email']
     hashednotifications[data['sessionId']].append(email)
     try:
