@@ -16,5 +16,5 @@ def create_app():
 
     app.register_blueprint(login.bp)
 
-    CORS(app, resources={r"/*": {"origins": "*"}})
+    CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
     return app
