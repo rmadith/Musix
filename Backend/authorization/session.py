@@ -87,7 +87,7 @@ def getParticipants():
     data = request.args.get('sessionId')
     url = "http://64.33.187.77:8000/db/get-participants"
     payload = json.dumps({
-        'session_id': data['sessionId']
+        'session_id': data
     })
     headers = {
         'Content-Type': 'application/json'
