@@ -68,7 +68,9 @@ def deleteSession(session_id):
     """
     try:
         session_collection = getDB()["Session"]
-        session_collection.delete_one({"_id": session_id})
+        host = session_collection.find_one({"_id": ObjectId(session_id)})["host"]
+        deleteUserFromSession(session_id, host)
+        session_collection.delete_one({"_id": ObjectId(session_id)})
         return True
     except:
         return False
