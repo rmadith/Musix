@@ -130,7 +130,7 @@ def login():
         'activeSessions': list(response_3.json().keys()),
         'topArtists': top_artists_response,
         'topTracks': top_tracks_response,
-        'streaming': response_4.json(),
+        'streaming': response_4.json().values(),
         'access_token': access_token
     }
 
