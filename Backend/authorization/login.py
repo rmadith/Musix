@@ -7,13 +7,14 @@ import json
 from secrets import *
 import datetime
 
-
+from flask_cors import CORS,cross_origin
 from . import Spotify
 
 
 bp = Blueprint('login', __name__, url_prefix='/auth')
 
 @bp.route('/login', methods=['POST'])
+@cross_origin()
 def login():
 
     data = request.json
