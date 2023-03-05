@@ -21,7 +21,7 @@ supremeHash = {}
 def addUsermethod():
     data = request.json
     try:
-        x = mongo.addUser(data["email"], data["access_token"], data["refresh_token"])
+        x = mongo.addUser(data['name'],data["email"], data["access_token"], data["refresh_token"])
         return {"id": str(x)}
     except:
         return {"id":400}
@@ -67,14 +67,14 @@ def addUserToSession():
     data = request.json
     try:
         x = mongo.addUserToSession(data["session_id"], data["user_id"])
-        y = mongo.addUserToSession(x, data["user_id"])
         playlist = Spotify.getplaylist( y["access_token"], data["type_id"])
         for song in playlist["tracks"]["items"]:
             name = song["track"]["album"]["name"]
             trackId = song["track"]["uri"]
             image = song["track"]["album"]["images"][0]["url"]
             supremeHash[str(data["session_id"])].add(Song.Song(name, trackId, image,0))
-        return {"id": str(x)}
+        
+        return {"creatorName": x["host"], "theme": x["theme"]}
     except:
         return {"id":400}
     

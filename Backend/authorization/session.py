@@ -56,7 +56,7 @@ def joinSession():
     except:
         return "Error", 400
     
-    return "Success", 200
+    return json.dumps(response), 200
 
 @bp.route('/delete-session', methods=['DELETE'])
 def deleteSession():
@@ -116,6 +116,7 @@ def addSong():
 
 @bp.route('/socket', methods=['GET'])
 def getQueue():
+
     data = request.args.get('sessionId')
     def stream():
         while(1):

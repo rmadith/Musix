@@ -38,13 +38,17 @@ def addUserToSession(session_id, user_id):
         session_collection = getDB()["Session"]
         # Get the users array
         users = session_collection.find_one({"_id": ObjectId(session_id)})["users"]
+        hostid = session_collection.find_one({"_id": ObjectId(session_id)})["host"]
+        theme = session_collection.find_one({"_id": ObjectId(session_id)})["type"]
+
+        host = getUser(hostid)["email"]
         # Add the user to the array
         users[user_id] = True
         user = getUser(user_id)
         user["activeSessions"][session_id] = True
         getDB()["User"].update_one({"_id": ObjectId(user_id)}, {"$set": {"activeSessions": user["activeSessions"]}})
         session_collection.update_one({"_id": ObjectId(session_id)}, {"$set": {"users": users}})
-        return True
+        return {"host": host, "theme": theme}
     except:
         return False
     
@@ -81,7 +85,7 @@ def deleteSession(session_id):
         return False
     
     
-def addUser(email, access_token, refresh_token):
+def addUser(name, email, access_token, refresh_token):
     """
     Adds a user to the database
     """
@@ -91,7 +95,7 @@ def addUser(email, access_token, refresh_token):
             x = user_collection.update_one({"email": email}, {"$set": {"access_token": access_token, "refresh_token": refresh_token}})
             # Return the ID of the user
             return user_collection.find_one({"email": email})["_id"]
-        x = user_collection.insert_one({"email": email, "access_token": access_token, "refresh_token": refresh_token, "activeSessions": {}, "streaming": False})
+        x = user_collection.insert_one({"name": name, "email": email, "access_token": access_token, "refresh_token": refresh_token, "activeSessions": {}, "streaming": False})
         return x.inserted_id
     except:
         return False

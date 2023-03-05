@@ -102,7 +102,8 @@ def login():
     payload = json.dumps({
         'email': user['email'],
         'access_token': access_token,
-        'refresh_token': tokens['refresh_token']
+        'refresh_token': tokens['refresh_token'],
+        'name': user['display_name']
     })
 
     headers = {
