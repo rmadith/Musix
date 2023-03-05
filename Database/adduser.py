@@ -90,7 +90,11 @@ def addUserToSession():
             supremeHash[str(data["session_id"])].add(Song.Song(name, trackId, image,0))
         
         print("returning")
-        return {"creatorName": x["host"], "theme": x["theme"]}
+        try:
+            host = x["host"]
+        except:
+            host = "str"
+        return {"creatorName": host, "theme": z}
     except:
         print("I died")
         return {"id":400}
