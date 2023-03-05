@@ -24,9 +24,9 @@ def createsession(host_id, type):
     session_sample_document = {"users": {}, "host": host_id, "type": type}
     # Set user as streaming
     getDB()["User"].update_one({"_id": ObjectId(host_id)}, {"$set": {"streaming": True}})
-    user = getUser(user_id)
-    user["activeSessions"][session_id] = True
-    getDB()["User"].update_one({"_id": ObjectId(user_id)}, {"$set": {"activeSessions": user["activeSessions"]}})
+    user = getUser(host_id)
+    user["activeSessions"][new_document.id] = True
+    getDB()["User"].update_one({"_id": ObjectId(host_id)}, {"$set": {"activeSessions": user["activeSessions"]}})
     new_document = session_collection.insert_one(session_sample_document)
     return new_document.inserted_id
 
