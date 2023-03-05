@@ -131,9 +131,10 @@ def getStreaming():
     try:
         x = mongo.getStreaming(data["id"])
         if x == True:
-            return {"id": True}
+            return {"streaming": True}
+        return {"streaming": False}
     except:
-        return {"id":False}
+        return {"streaming":False}
 
 
 def enqueue(args, auth):
