@@ -78,7 +78,7 @@ def addUser(email, access_token, refresh_token):
             x = user_collection.update_one({"email": email}, {"$set": {"access_token": access_token, "refresh_token": refresh_token}})
             # Return the ID of the user
             return user_collection.find_one({"email": email})["_id"]
-        x = user_collection.insert_one({"email": email, "access_token": access_token, "refresh_token": refresh_token})
+        x = user_collection.insert_one({"email": email, "access_token": access_token, "refresh_token": refresh_token, "activeSessions": {}, "topArtists": {}, "topTracks": {}, "streaming": False})
         return x.inserted_id
     except:
         return False
@@ -91,4 +91,8 @@ def getUser(id):
 
 
     
-
+def getUserSession(id):
+    """
+    Gets a user's active sessions
+    """
+    return getDB()["User"].find_one({"_id": id})["activeSessions"]

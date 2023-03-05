@@ -15,3 +15,16 @@ def addUsermethod():
     except:
         return {"id":400}
     
+
+@bp.route('/getUserSession', methods=['POST'])
+def getUserSession():
+    data = request.json
+    print (data)
+    try:
+        x = mongo.getUserSession(data["id"])
+        print(x)
+        return x
+    except:
+        return {"id":400}
+    
+    

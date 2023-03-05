@@ -41,14 +41,14 @@ Required Scopes -
 Parameters: Authorization Code (Accessed from DB)
 Returns: JSON Object if Authorized, False if Unauthorized or Rate Limited
 """
-def gettop(authcode:str, type:str):
+def gettop(authcode:str, type:str, limit:int=3):
 	headers = {
 		"Authorization": "Authorization: Bearer " + authcode,
 		"Content-Type": "application/json",
 		"Accept": "application/json"
 	}
 
-	r = requests.get("https://api.spotify.com/v1/me/top/"+type+"?time_range=short_term&limit=50", headers=headers)
+	r = requests.get("https://api.spotify.com/v1/me/top/"+type+"?time_range=short_term&limit="+limit, headers=headers)
 
 	if r.status_code == 200:
 		return r.json()

@@ -1,11 +1,11 @@
 from flask import (Blueprint, request, json, session, make_response, render_template, redirect)
 
+import Spotify
 import os
 import requests
 import base64
 import json
 from secrets import *
-import datetime
 
 from flask_cors import CORS,cross_origin
 from . import Spotify
@@ -51,6 +51,49 @@ def login():
     print(tokens)
 
     access_token = tokens['access_token']
+    top_artists = Spotify.gettop(access_token, 'artists')
+    if top_artists == False:
+        return {"error": "Unauthorized"}
+    
+    top_artists = top_artists['items']
+    top_artists_response = [
+            {
+                'name': top_artists[0]['name'],
+                'image': top_artists[0]["images"][0]["url"],
+            },
+            {
+                'name': top_artists[1]['name'],
+                'image': top_artists[1]["images"][0]["url"],
+            },
+            {
+                'name': top_artists[2]['name'],
+                'image': top_artists[2]["images"][0]["url"],
+            }
+        ]
+    
+
+    top_tracks = Spotify.gettop(access_token, 'tracks')
+    if top_tracks == False:
+        return {"error": "Unauthorized"}
+    
+    top_tracks = top_tracks['items']
+    top_tracks_response = [
+            {
+                'name': top_tracks[0]['name'],
+                'image': top_tracks[0]['album']['images'][0]['url'],
+                'artist': top_tracks[0]['artists'][0]['name']
+            },
+            {
+                'name': top_tracks[1]['name'],
+                'image': top_tracks[1]['album']['images'][0]['url'],
+                'artist': top_tracks[1]['artists'][0]['name']
+            },
+            {
+                'name': top_tracks[2]['name'],
+                'image': top_tracks[2]['album']['images'][0]['url'],
+                'artist': top_tracks[2]['artists'][0]['name']
+            }
+        ]
 
     res = Spotify.getme(access_token)
 
@@ -71,6 +114,8 @@ def login():
 
     response = requests.request("POST", url, headers=headers, data=payload)
 
+
+
     print(response.text)
 
     user_object = {
@@ -78,9 +123,10 @@ def login():
         'name': user['display_name'],
         'email': user['email'],
         'activeSessions': [],
-        'topArtists': [],
-        'topTracks': [],
-        'streaming': False
+        'topArtists': top_artists_response,
+        'topTracks': top_tracks_response,
+        'streaming': False,
+        'access_token': access_token
     }
 
     return user_object
