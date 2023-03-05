@@ -51,6 +51,7 @@ def joinSession():
     }
     try:
         response = requests.request("PUT", url, headers=headers, data=payload)
+        print(response.json())
         response_name = response.json()['creatorName']
         response_theme = response.json()['theme']
         try:
