@@ -42,12 +42,14 @@ def addUserToSession(session_id, user_id):
         theme = session_collection.find_one({"_id": ObjectId(session_id)})["type"]
 
         host = getUser(hostid)["name"]
-        print(host)
         # Add the user to the array
         users[user_id] = True
+        print(users)
         user = getUser(user_id)
         user["activeSessions"][session_id] = True
+        print("Bye")
         getDB()["User"].update_one({"_id": ObjectId(user_id)}, {"$set": {"activeSessions": user["activeSessions"]}})
+        print("Hello")
         session_collection.update_one({"_id": ObjectId(session_id)}, {"$set": {"users": users}})
         return {"host": host, "theme": theme}
     except Exception as e:
