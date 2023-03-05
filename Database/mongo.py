@@ -90,7 +90,5 @@ def getUser(id):
     return getDB()["User"].find_one({"_id": id})
 
 
-print(addUser("rmadi", "123", "123"))
-
     
 
