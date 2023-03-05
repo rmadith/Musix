@@ -49,8 +49,8 @@ def addUserToSession(session_id, user_id):
         getDB()["User"].update_one({"_id": ObjectId(user_id)}, {"$set": {"activeSessions": user["activeSessions"]}})
         session_collection.update_one({"_id": ObjectId(session_id)}, {"$set": {"users": users}})
         return {"host": host, "theme": theme}
-    except:
-        return False
+    except Exception as e:
+        return {"id": str(e)}
     
 def deleteUserFromSession(session_id, user_id):
     """
