@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Spotify Calls using Authorizaation Code
+Spotify Calls using Authorization Code
 """
 
 import requests

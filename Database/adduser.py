@@ -3,10 +3,11 @@ import sys
 import time
 
 sys.path.append("/home/muthu/Musix/Algorithm")
+sys.path.append("/home/muthu/Musix/Backend/authorization")
 import HashedQueue
 import Song
 
-from . import Spotify
+import Spotify
 import threading
 from flask import (Blueprint, request)
 
