@@ -27,7 +27,7 @@ def getUserSession():
 def createsession():
     data = request.json
     try:
-        x = mongo.createSession(data["host_id"], data["type_id"])
+        x = mongo.createsession(data["host_id"], data["type_id"])
         #testid = mongo.getUser(data["host_id"])
         #y = mongo.addUserToSession(x, data["host_id"], testid["access_token"], testid["refresh_token"])
         return {"id": str(x)}
