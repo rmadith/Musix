@@ -49,8 +49,6 @@ def joinSession():
     headers = {
         'Content-Type': 'application/json'
     }
-    url_2 = "http://64.33.187.77:8000/db/get-user"
-    response_2 = requests.request("POST", url_2, headers=headers, data=payload)
     try:
         response = requests.request("PUT", url, headers=headers, data=payload)
         response_name = response.json()['creatorName']
