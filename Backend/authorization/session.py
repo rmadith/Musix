@@ -1,10 +1,13 @@
-from flask import (Blueprint, request, json)
+from flask import (Blueprint, request, json, flask, stream)
 import sys
 
 sys.path.insert(0, "/home/muthu/Musix/Backend/authorization")
 import requests
+import threading
 
 bp = Blueprint('session', __name__, url_prefix='/sessions')
+
+hashednotifications = {}
 
 
 @bp.route('/create-session', methods=['POST'])
@@ -23,6 +26,8 @@ def createsession():
 
     try:
         response = requests.request("POST", url, headers=headers, data=payload)
+        hashednotifications[response.json()['id']] = []
+
     except:
         return "Error", 400
 
@@ -41,7 +46,10 @@ def joinSession():
     headers = {
         'Content-Type': 'application/json'
     }
-
+    url_2 = "http://64.33.187.77:8000/db/get-user"
+    response_2 = requests.request("POST", url_2, headers=headers, data=payload)
+    email = response_2.json()['email']
+    hashednotifications[data['sessionId']].append(email)
     try:
         response = requests.request("PUT", url, headers=headers, data=payload)
     except:
@@ -105,3 +113,14 @@ def addSong():
     trackId = data['trackId']
     sessionId = data['sessionId']
 
+@bp.route('/get-queue', methods=['GET'])
+def getQueue():
+    data = request.args.get('sessionId')
+    while(1):
+        if hashednotifications[data] is not None:
+            # Delete the notification
+            x = hashednotifications[data]
+            hashednotifications[data] = None
+            yield x
+    
+    return flask.Response(stream(), mimetype='text/event-stream')

@@ -116,6 +116,15 @@ def getAuth():
     except:
         return {"id":400}
     
+@bp.route('/get-user', methods=['POST'])
+def getUser():
+    data = request.json
+    try:
+        x = mongo.getUser(data["user_id"])
+        return x
+    except:
+        return {"id":400}
+    
 
 
 def enqueue(args, auth):
