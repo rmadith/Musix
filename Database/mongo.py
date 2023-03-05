@@ -104,10 +104,7 @@ def getUsersinSession(session_id):
     """
     x = getDB()["Session"].find_one({"_id": ObjectId(session_id)})["users"]
     print(x)
-    y = []
-    for i in x:
-        y.append(getUser(i))
-    return json.dumps(y)
+    return json.dumps(x)
 
 
 
