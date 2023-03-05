@@ -65,9 +65,12 @@ def login():
         'access_token': access_token,
         'refresh_token': tokens['refresh_token']
     }
+
+
+
     api_r = requests.post(api_url, data=data)
 
-    print(api_r)
+    print(api_r.text)
 
     user_object = {
         'id': api_r.json()['id'],
