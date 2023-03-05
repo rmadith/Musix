@@ -62,7 +62,7 @@ def login():
         'id': uuid.uuid1(),
         'name': user['display_name'],
         'email': user['email'],
-        'activeSession': [],
+        'activeSessions': [],
         'topArtists': [],
         'topTracks': [],
         'streaming': False
