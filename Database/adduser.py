@@ -53,9 +53,10 @@ def createsession():
             name = song["track"]["album"]["name"]
             trackId = song["track"]["album"]["uri"]
             image = song["track"]["album"]["images"][0]["url"]
-            print(name, trackId, image)
             supremeHash[str(x)].add(Song.Song(name, trackId, image,0))
+        print("hello")
         t1 = threading.Thread(target=enqueue(), args=(str(x), y["access_token"],))
+        print("hello")
         t1.start()
         return {"id": str(x)}
     except:
