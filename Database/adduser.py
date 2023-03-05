@@ -1,3 +1,4 @@
+import json
 from flask import (Blueprint, request)
 
 from . import mongo
@@ -73,7 +74,7 @@ def getParticipants():
         for i in x:
             x[i] = mongo.getUser(i)
             y.append(x[i]["email"])
-        return {"participants": y}
+        return json.dumps(y)
     except:
         return {"id":400}
     
