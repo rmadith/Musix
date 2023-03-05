@@ -32,7 +32,7 @@ def getUserSession():
     data = request.json
     try:
         x = mongo.getUserSession(data["id"])
-        return x.json()
+        return x
     except:
         return {"id":400}
     
