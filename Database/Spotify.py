@@ -110,12 +110,12 @@ def addtoQueue(authcode:str, trackID:str):
 		return True
 	
 	if r.status_code == 401 or r.status_code == 403:
-		return r.status_code
+		return False
 	
 	if r.status_code == 429:
-		return r.status_code
+		return False
 	
-	return False
+	return "Hello"
 
 """
 Search Spotify
