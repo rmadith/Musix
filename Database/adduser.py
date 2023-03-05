@@ -47,14 +47,16 @@ def createsession():
             playlist = Spotify.getplaylist( str(mongo.getUser(data["host_id"])["access_token"]), str(data["type_id"]))
         except Exception as e:
             print(e)
-        print(playlist)
         for song in playlist["tracks"]["items"]:
             name = song["track"]["album"]["name"]
             trackId = song["track"]["album"]["uri"]
             image = song["track"]["album"]["images"][0]["url"]
             supremeHash[str(x)].add(Song.Song(name, trackId, image,0))
         print("hello")
-        t1 = threading.Thread(target=enqueue(), args=(str(x), y["access_token"],))
+        try:
+            t1 = threading.Thread(target=enqueue(), args=(str(x), y["access_token"],))
+        except Exception as e:
+            print(e)
         print("hello")
         t1.start()
         return {"id": str(x)}
