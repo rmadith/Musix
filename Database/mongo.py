@@ -40,6 +40,7 @@ def addUserToSession(session_id, user_id):
         users = session_collection.find_one({"_id": ObjectId(session_id)})["users"]
         hostid = session_collection.find_one({"_id": ObjectId(session_id)})["host"]
         theme = session_collection.find_one({"_id": ObjectId(session_id)})["type"]
+        print(theme)
 
         host = getUser(hostid)["name"]
         # Add the user to the array
@@ -50,7 +51,7 @@ def addUserToSession(session_id, user_id):
         session_collection.update_one({"_id": ObjectId(session_id)}, {"$set": {"users": users}})
         return {"host": host, "theme": theme}
     except Exception as e:
-        return {"id": str(e)}
+        return False
     
 def deleteUserFromSession(session_id, user_id):
     """
