@@ -65,12 +65,12 @@ def login():
         'access_token': access_token,
         'refresh_token': tokens['refresh_token']
     }
-    #api_r = requests.post(api_url, data=data)
+    api_r = requests.post(api_url, data=data)
 
-    #print(api_r.json())
+    print(api_r.json())
 
     user_object = {
-        'id': uuid.uuid1(),
+        'id': api_r.json()['id'],
         'name': user['display_name'],
         'email': user['email'],
         'activeSessions': [],
