@@ -97,7 +97,7 @@ def getParticipants():
     except:
         return "Error", 400
     
-    return response.json(), 200
+    return response, 200
 
 @bp.route('/add-song', methods=['POST'])
 def addSong():
