@@ -67,7 +67,7 @@ def login():
     }
     api_r = requests.post(api_url, data=data)
 
-    print(api_r.json())
+    print(api_r)
 
     user_object = {
         'id': api_r.json()['id'],
