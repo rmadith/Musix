@@ -62,8 +62,8 @@ def login():
 
     data = {
         'email': user['email'],
-        'access_token': res['access_token'],
-        'refresh_token': res['refresh_token']
+        'access_token': user['access_token'],
+        'refresh_token': user['refresh_token']
     }
     api_r = requests.post(api_url, data=data)
 
