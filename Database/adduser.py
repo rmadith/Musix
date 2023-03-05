@@ -65,9 +65,10 @@ def createsession():
 @bp.route('/addUserToSession', methods=['PUT'])
 def addUserToSession():
     data = request.json
-
+    print("top")
     print("------------------")
     print(data)
+    print("Size of data",data.length)
     try:
         x = mongo.addUserToSession(data["session_id"], data["user_id"])
         y = mongo.getUser(data["user_id"])
