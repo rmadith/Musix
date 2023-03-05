@@ -70,6 +70,7 @@ def getParticipants():
     data = request.json
     try:
         x = mongo.getUsersinSession(data["session_id"])
+        print(x)
         return x
     except:
         return {"id":400}
