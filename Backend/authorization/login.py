@@ -57,14 +57,14 @@ def login():
 
     user = res
 
-    session.clear()
+    # session.clear()
     # session['domain'] = "localhost:3000"
-    session["user_email"] = user["email"]
+    # session["user_email"] = user["email"]
 
-    # expire_date = datetime.datetime.now()
-    # expire_date = expire_date + datetime.timedelta(days=90)
+    expire_date = datetime.datetime.now()
+    expire_date = expire_date + datetime.timedelta(days=90)
 
-    # resp = make_response()
-    # resp.set_cookie('somecookiename', 'I am cookie', domain=".jmsgvn.com", expires=expire_date)
+    resp = make_response()
+    resp.set_cookie('somecookiename', 'I am cookie', domain="musix-two.vercel.app", expires=expire_date)
 
-    return {"response": "success"}
+    return resp
