@@ -96,8 +96,6 @@ def login():
 
     res = Spotify.getme(access_token)
 
-    print(res)
-
     user = res
     url = "http://64.33.187.77:8000/db/adduser"
 
@@ -121,6 +119,7 @@ def login():
 
     response_3 = requests.request("POST", url, headers=headers, data=data)
 
+    print(response_3.json())
 
     user_object = {
         'id': response.json()['id'],
