@@ -126,7 +126,7 @@ def login():
         'id': response.json()['id'],
         'name': user['display_name'],
         'email': user['email'],
-        'activeSessions': json.loads(response_3.json()),
+        'activeSessions': [],
         'topArtists': top_artists_response,
         'topTracks': top_tracks_response,
         'streaming': False,
