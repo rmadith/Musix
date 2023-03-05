@@ -117,7 +117,7 @@ def getUserSession(id):
     """
     Gets a user's active sessions
     """
-    return getDB()["User"].find({"_id": ObjectId(id)})["activeSessions"]
+    return getDB()["User"].find_one({"_id": ObjectId(id)})["activeSessions"]
 
 def getAuth(id):
     return getDB()["User"].find_one({"_id": ObjectId(id)})["access_token"]
