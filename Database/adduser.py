@@ -1,6 +1,6 @@
 from flask import (Blueprint, request)
 
-import mongo
+from . import mongo
 
 bp = Blueprint('login', __name__, url_prefix='/')
 
