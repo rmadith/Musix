@@ -1,8 +1,8 @@
-from flask import (Blueprint, request, json, session)
+from flask import (Blueprint, request)
 
 import mongo
 
-bp = Blueprint('login', __name__, url_prefix='/auth')
+bp = Blueprint('login', __name__, url_prefix='/')
 
 @bp.route('/adduser', methods=['POST'])
 def addUser():
