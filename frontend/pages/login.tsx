@@ -11,7 +11,7 @@ export default function Login({ code }: { code: string }) {
 
   useEffect(() => {
     // fetch user data from backend using code
-    fetch(`http://64.33.187.77:8000/auth/login`, {
+    fetch(`http://127.0.0.1:8000/auth/login`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",

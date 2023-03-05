@@ -61,5 +61,5 @@ export const scopes = [
   'user-read-email'
 ]
 
-export const redirectUri = 'http://localhost:3000/login'
+export const redirectUri = 'http://127.0.0.1:3000/login'
 export const clientId = '1a1b5b6ffcd84abe970e58d7524b24ce'
