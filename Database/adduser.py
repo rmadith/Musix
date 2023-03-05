@@ -83,6 +83,10 @@ def addUserToSession():
             name = song["track"]["album"]["name"]
             trackId = song["track"]["uri"]
             image = song["track"]["album"]["images"][0]["url"]
+            print(name)
+            print(trackId)
+            print(image)
+            print(supremeHash)
             supremeHash[str(data["session_id"])].add(Song.Song(name, trackId, image,0))
         
         print("returning")
