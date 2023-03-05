@@ -1,4 +1,4 @@
-from flask import (Blueprint, request, json, session, make_response, render_template)
+from flask import (Blueprint, request, json, session, make_response, render_template, redirect)
 
 import os
 import requests
@@ -77,7 +77,7 @@ def refresh():
     expire_date = datetime.datetime.now()
     expire_date = expire_date + datetime.timedelta(days=90)
 
-    resp = make_response()
+    resp = redirect('https://musix-two.vercel.app', code=302)
     resp.set_cookie('somecookiename', "test", expires=None, secure=True, httponly=True, samesite='None')
 
     return resp
