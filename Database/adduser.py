@@ -42,13 +42,11 @@ def createsession():
     try:
         x = mongo.createsession(data["host_id"], data["type_id"])
         y = mongo.addUserToSession(x, data["host_id"])
-        print("Hi")
         supremeHash[str(x)] = HashedQueue.HashedQueue()
-        print("Hashmaps!")
-        print(Spotify.test())
-        playlist = Spotify.getplaylist( str(y["access_token"]), str(data["type_id"]))
-        if playlist == False:
-            return {"id":500}
+        try:
+            playlist = Spotify.getplaylist( str(y["access_token"]), str(data["type_id"]))
+        except Exception as e:
+            print(e)
         print(playlist)
         for song in playlist["tracks"]["items"]:
             supremeHash[str(x)].add(Song.Song(song["track"]["album"]["name"], song["track"]["album"]["uri"], song["track"]["album"]["images"][0]["url"]))
