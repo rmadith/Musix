@@ -77,7 +77,7 @@ def addUserToSession():
             z = data["type_id"]
         except:
             z = x["theme"]
-        playlist = Spotify.getplaylist( y["access_token"], data["type_id"])
+        playlist = Spotify.getplaylist( y["access_token"], z)
         print(playlist)
         for song in playlist["tracks"]["items"]:
             name = song["track"]["album"]["name"]
