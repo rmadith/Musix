@@ -4,6 +4,8 @@ Python Wrapper to handle sessions with MongoDB
 
 import json
 from pymongo import MongoClient
+from bson.objectid import ObjectId
+
 
 def getDB():
     """
@@ -90,7 +92,8 @@ def getUser(ides):
     """
     Gets a user from the database
     """
-    return getDB()["User"].find_one({"_id": ides})
+    x = ObjectId(ides)
+    return getDB()["User"].find_one({"_id": x})
 
 def getUsersinSession(session_id):
     """
@@ -113,3 +116,4 @@ def getUserSession(id):
 
 def getAuth(id):
     return getDB()["User"].find_one({"_id": id})["access_token"]
+
