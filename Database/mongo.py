@@ -34,6 +34,9 @@ def addUserToSession(session_id, user_id):
     """
     Adds a user to a session
     """
+    print("       ")
+    print("       ")
+    print("       ")
 
     print("------------------")
     print("Session ID",session_id)
@@ -64,6 +67,7 @@ def addUserToSession(session_id, user_id):
 
         user = getUser(user_id)
 
+        print("UserID",user_id)
         print("User1",user)
 
         user["activeSessions"][session_id] = True
