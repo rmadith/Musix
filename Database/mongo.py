@@ -35,9 +35,9 @@ def addUserToSession(session_id, user_id):
         users = session_collection.find_one({"_id": session_id})["users"]
         # Add the user to the array
         users[user_id] = True
-        user = getDB()["User"].find_one({"_id": user_id})
+        user = getUser(user_id)
         user["activeSessions"][session_id] = True
-        getDB()["User"].update_one({"_id": user_id}, {"$set": {"activeSessions": user["activeSessions"]}})
+        getDB()["User"].update_one({"_id": ObjectId(user_id)}, {"$set": {"activeSessions": user["activeSessions"]}})
         session_collection.update_one({"_id": session_id}, {"$set": {"users": users}})
         return True
     except:
