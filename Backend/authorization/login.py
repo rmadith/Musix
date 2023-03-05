@@ -67,7 +67,5 @@ def login():
 
     resp = make_response()
     resp.set_cookie('somecookiename', 'I am cookie', expires=expire_date, secure=True, httponly=True, samesite='None')
-    resp.headers['Access-Control-Allow-Credentials'] = True
-    resp.headers['Access-Control-Allow-Origin'] = 'https://musix-two.vercel.app'
 
     return resp
