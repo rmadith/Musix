@@ -32,7 +32,6 @@ def addUserToSession(session_id, user_id):
     try:    
         session_collection = getDB()["Session"]
         # Get the users array
-        print('Hello')
         users = session_collection.find_one({"_id": ObjectId(session_id)})["users"]
         # Add the user to the array
         print(users)
