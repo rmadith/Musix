@@ -1,0 +1,13 @@
+{
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/api/callback": "pages/api/callback.js",
+  "/api/hello": "pages/api/hello.js",
+  "/create": "pages/create.html",
+  "/home": "pages/home.html",
+  "/": "pages/index.html",
+  "/_error": "pages/_error.js",
+  "/host": "pages/host.js",
+  "/login": "pages/login.js",
+  "/404": "pages/404.html"
+}
