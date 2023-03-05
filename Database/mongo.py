@@ -60,8 +60,8 @@ def deleteUserFromSession(session_id, user_id):
         del users[user_id]
         user = getDB()["User"].find_one({"_id": user_id})
         del user["activeSessions"][session_id]
-        getDB()["User"].update_one({"_id": user_id}, {"$set": {"activeSessions": user["activeSessions"]}})
-        session_collection.update_one({"_id": session_id}, {"$set": {"users": users}})
+        getDB()["User"].update_one({"_id": ObjectId(user_id)}, {"$set": {"activeSessions": user["activeSessions"]}})
+        session_collection.update_one({"_id": ObjectId(session_id)}, {"$set": {"users": users}})
         return True
     except:
         return False
@@ -117,8 +117,8 @@ def getUserSession(id):
     """
     Gets a user's active sessions
     """
-    return getDB()["User"].find_one({"_id": id})["activeSessions"]
+    return getDB()["User"].find_one({"_id": ObjectId(id)})["activeSessions"]
 
 def getAuth(id):
-    return getDB()["User"].find_one({"_id": id})["access_token"]
+    return getDB()["User"].find_one({"_id": ObjectId(id)})["access_token"]
 
