@@ -52,12 +52,10 @@ def createsession():
             trackId = song["track"]["album"]["uri"]
             image = song["track"]["album"]["images"][0]["url"]
             supremeHash[str(x)].add(Song.Song(name, trackId, image,0))
-        print("hello")
         try:
             t1 = threading.Thread(target=enqueue, args=(str(x), str(mongo.getUser(data["host_id"])["access_token"]),))
         except Exception as e:
             print(e)
-        print("hello")
         t1.start()
         return {"id": str(x)}
     except:

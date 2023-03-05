@@ -110,10 +110,10 @@ def addtoQueue(authcode:str, trackID:str):
 		return True
 	
 	if r.status_code == 401 or r.status_code == 403:
-		return False
+		return r.status_code
 	
 	if r.status_code == 429:
-		return False
+		return r.status_code
 	
 	return False
 
