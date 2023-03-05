@@ -49,7 +49,6 @@ def createsession():
             print(e)
         print(playlist)
         for song in playlist["tracks"]["items"]:
-            print("Hello")
             name = song["track"]["album"]["name"]
             trackId = song["track"]["album"]["uri"]
             image = song["track"]["album"]["images"][0]["url"]
