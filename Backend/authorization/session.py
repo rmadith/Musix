@@ -96,6 +96,7 @@ def getParticipants():
         response = requests.request("POST", url, headers=headers, data=payload)
     except:
         return "Error", 400
+    print(response.text)
 
     return response.json, 200
 
