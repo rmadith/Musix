@@ -42,7 +42,7 @@ def login():
 
     data['grant_type'] = 'authorization_code'
     data['code'] = code
-    data['redirect_uri'] = 'https://musix-two.vercel.app/login'
+    data['redirect_uri'] = 'http://localhost:3000/login'
 
     r = requests.post(url, headers=headers, data=data)
 
