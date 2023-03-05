@@ -39,6 +39,8 @@ def joinSession():
     data = request.json
     url = "http://64.33.187.77:8000/db/addUserToSession"
 
+    print(data)
+
     payload = json.dumps({
         'session_id': data['sessionId'],
         'user_id': data['userId'],
