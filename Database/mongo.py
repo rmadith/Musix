@@ -37,7 +37,7 @@ def addUserToSession(session_id, user_id):
         print(users)
         users[user_id] = True
         user = getUser(user_id)
-        user["activeSessions"].append(session_id)
+        user["activeSessions"][session_id] = True
         getDB()["User"].update_one({"_id": ObjectId(user_id)}, {"$set": {"activeSessions": user["activeSessions"]}})
         session_collection.update_one({"_id": session_id}, {"$set": {"users": users}})
         return True
@@ -84,7 +84,7 @@ def addUser(email, access_token, refresh_token):
             x = user_collection.update_one({"email": email}, {"$set": {"access_token": access_token, "refresh_token": refresh_token}})
             # Return the ID of the user
             return user_collection.find_one({"email": email})["_id"]
-        x = user_collection.insert_one({"email": email, "access_token": access_token, "refresh_token": refresh_token, "activeSessions": [], "streaming": False})
+        x = user_collection.insert_one({"email": email, "access_token": access_token, "refresh_token": refresh_token, "activeSessions": {}, "streaming": False})
         return x.inserted_id
     except:
         return False
