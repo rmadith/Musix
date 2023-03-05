@@ -40,9 +40,9 @@ def addUserToSession(session_id, user_id):
         users = session_collection.find_one({"_id": ObjectId(session_id)})["users"]
         hostid = session_collection.find_one({"_id": ObjectId(session_id)})["host"]
         theme = session_collection.find_one({"_id": ObjectId(session_id)})["type"]
-        print(theme)
 
         host = getUser(hostid)["name"]
+        print(host)
         # Add the user to the array
         users[user_id] = True
         user = getUser(user_id)
