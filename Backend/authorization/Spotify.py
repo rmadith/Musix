@@ -48,7 +48,7 @@ def gettop(authcode:str, type:str, limit:int=3):
 		"Accept": "application/json"
 	}
 
-	r = requests.get("https://api.spotify.com/v1/me/top/"+type+"?time_range=short_term&limit="+limit, headers=headers)
+	r = requests.get("https://api.spotify.com/v1/me/top/"+type+"?time_range=short_term&limit="+str(limit), headers=headers)
 
 	if r.status_code == 200:
 		return r.json()
