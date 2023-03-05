@@ -34,9 +34,9 @@ def addUserToSession(session_id, user_id):
         # Get the users array
         users = session_collection.find_one({"_id": ObjectId(session_id)})["users"]
         # Add the user to the array
+        print(users)
         users[user_id] = True
         user = getUser(user_id)
-        print("Hello")
         user["activeSessions"].append(session_id)
         getDB()["User"].update_one({"_id": ObjectId(user_id)}, {"$set": {"activeSessions": user["activeSessions"]}})
         session_collection.update_one({"_id": session_id}, {"$set": {"users": users}})
