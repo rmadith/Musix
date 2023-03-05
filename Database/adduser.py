@@ -42,7 +42,6 @@ def createsession():
     try:
         x = mongo.createsession(data["host_id"], data["type_id"])
         y = mongo.addUserToSession(x, data["host_id"])
-        print(y)
         supremeHash[str(x)] = HashedQueue.HashedQueue()
         try:
             playlist = Spotify.getplaylist( str(mongo.getUser(data["host_id"])["access_token"]), str(data["type_id"]))
@@ -59,8 +58,8 @@ def createsession():
             print(e)
         t1.start()
         return {"id": str(x)}
-    except:
-        return {"id":400}
+    except Exception as e:
+        return {"id": str(e)}
     
     
 @bp.route('/addUserToSession', methods=['PUT'])
