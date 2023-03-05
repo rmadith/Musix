@@ -58,8 +58,19 @@ def login():
 
     user = res
 
+    api_url = "http://64.33.187.77:8000/adduser"
+
+    data = {
+        'email': user['email'],
+        'access_token': res['access_token'],
+        'refresh_token': res['refresh_token']
+    }
+    api_r = requests.post(api_url, data=data)
+
+    print(api_r.json())
+
     user_object = {
-        'id': uuid.uuid1(),
+        'id': api_r.json()['id'],
         'name': user['display_name'],
         'email': user['email'],
         'activeSessions': [],
