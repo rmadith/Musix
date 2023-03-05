@@ -130,9 +130,10 @@ def getStreaming():
     data = request.json
     try:
         x = mongo.getStreaming(data["id"])
-        return x
+        if x == True:
+            return {"id": True}
     except:
-        return {"id":400}
+        return {"id":False}
 
 
 def enqueue(args, auth):

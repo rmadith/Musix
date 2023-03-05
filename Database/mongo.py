@@ -124,6 +124,4 @@ def getAuth(id):
 
 def getStreaming(id):
     if getDB()["User"].find_one({"_id": ObjectId(id)})["streaming"] == True:
-        return {"streaming": True}
-    else:
-        return {"streaming": False}
+        return True
