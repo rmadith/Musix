@@ -9,6 +9,7 @@ import sys
 
 
 sys.path.insert(0, "/home/muthu/Musix/Backend/authorization")
+import Spotify
 
 bp = Blueprint('login', __name__, url_prefix='/auth')
 
