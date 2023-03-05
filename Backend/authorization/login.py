@@ -61,9 +61,9 @@ def login():
     api_url = "http://64.33.187.77:8000/db/adduser"
 
     data = {
-        'email': user['email'],
-        'access_token': access_token,
-        'refresh_token': tokens['refresh_token']
+        "email": "js",
+        "access_token": "test",
+        "refresh_token": "test"
     }
 
     print(data)
