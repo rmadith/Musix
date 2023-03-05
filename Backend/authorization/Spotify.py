@@ -146,5 +146,6 @@ def getSong(authcode:str, Song:str):
 	return False
 
 
-
+def test():
+	return "Function call successful"
 
