@@ -1,6 +1,5 @@
 from flask import (Blueprint, request, json, session, make_response, render_template, redirect)
 
-import Spotify
 import os
 import requests
 import base64
