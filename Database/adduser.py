@@ -119,5 +119,6 @@ def enqueue(args, auth):
     while(1):
         for i in range(1,5):
             Song = supremeHash[str(args)].pop()
+            print(Song.trackID)
             print(Spotify.addtoQueue(auth, Song.trackID))
         time.sleep(60)
