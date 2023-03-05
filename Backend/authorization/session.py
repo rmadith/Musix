@@ -4,7 +4,7 @@ import sys
 sys.path.insert(0, "/home/muthu/Musix/Backend/authorization")
 import requests
 
-bp = Blueprint('session', __name__, url_prefix='/session')
+bp = Blueprint('session', __name__, url_prefix='/sessions')
 
 
 @bp.route('/create-session', methods=['POST'])
