@@ -59,6 +59,7 @@ def joinSession():
             hashednotifications[data['sessionId']].append(response_name)
         except:
             hashednotifications[data['sessionId']] = []
+        print(response_name)
     except:
         return "Error", 400
     print(json.dumps({"creatorName":response_name, "themeId":response_theme}))
