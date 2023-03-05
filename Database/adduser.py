@@ -69,8 +69,11 @@ def addUserToSession():
         x = mongo.addUserToSession(data["session_id"], data["user_id"])
         y = mongo.addUserToSession(x, data["user_id"])
         playlist = Spotify.getplaylist( y["access_token"], data["type_id"])
-        for i in playlist["tracks"]["items"]:
-            supremeHash[str(data["session_id"])].add(Song.Song(i["track"]["album"]["name"], i["track"]["album"]["uri"], i["track"]["album"]["images"][0]["url"]))
+        for song in playlist["tracks"]["items"]:
+            name = song["track"]["album"]["name"]
+            trackId = song["track"]["uri"]
+            image = song["track"]["album"]["images"][0]["url"]
+            supremeHash[str(data["session_id"])].add(Song.Song(name, trackId, image,0))
         return {"id": str(x)}
     except:
         return {"id":400}
@@ -99,7 +102,6 @@ def getParticipants():
     data = request.json
     try:
         x = mongo.getUsersinSession(data["session_id"])
-        print(x)
         return x
     except:
         return {"id":400}
@@ -119,6 +121,5 @@ def enqueue(args, auth):
     while(1):
         for i in range(1,5):
             Song = supremeHash[str(args)].pop()
-            print(Song.trackID)
-            print(Spotify.addtoQueue(auth, Song.trackID))
+            Spotify.addtoQueue(auth, Song.trackID)
         time.sleep(60)
