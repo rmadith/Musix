@@ -125,6 +125,14 @@ def getUser():
     except:
         return {"id":400}
     
+@bp.route('/getStreaming', methods=['POST'])
+def getStreaming():
+    data = request.json
+    try:
+        x = mongo.getStreaming(data["id"])
+        return x
+    except:
+        return {"id":400}
 
 
 def enqueue(args, auth):

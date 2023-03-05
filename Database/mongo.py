@@ -122,3 +122,5 @@ def getUserSession(id):
 def getAuth(id):
     return getDB()["User"].find_one({"_id": ObjectId(id)})["access_token"]
 
+def getStreaming(id):
+    return getDB()["User"].find_one({"_id": ObjectId(id)})["streaming"]

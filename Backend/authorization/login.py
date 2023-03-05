@@ -119,6 +119,10 @@ def login():
 
     response_3 = requests.request("POST", url, headers=headers, data=data)
 
+    url = "http://64.33.187.77:8000/db/getStreaming"
+
+    response_4 = requests.request("POST", url, headers=headers, data=data)
+
     user_object = {
         'id': response.json()['id'],
         'name': user['display_name'],
@@ -126,7 +130,7 @@ def login():
         'activeSessions': list(response_3.json().keys()),
         'topArtists': top_artists_response,
         'topTracks': top_tracks_response,
-        'streaming': False,
+        'streaming': response_4.json(),
         'access_token': access_token
     }
 
