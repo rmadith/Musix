@@ -43,7 +43,9 @@ def createsession():
         print("Hi")
         supremeHash[str(x)] = HashedQueue.HashedQueue()
         print("Hashmaps!")
-        playlist = Spotify.getplaylist( y["access_token"], data["type_id"])
+        playlist = Spotify.getplaylist( str(y["access_token"]), str(data["type_id"]))
+        if playlist == False:
+            return {"id":500}
         print(playlist)
         for song in playlist["tracks"]["items"]:
             supremeHash[str(x)].add(Song.Song(song["track"]["album"]["name"], song["track"]["album"]["uri"], song["track"]["album"]["images"][0]["url"]))
