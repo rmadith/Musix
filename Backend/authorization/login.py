@@ -119,13 +119,12 @@ def login():
 
     response_3 = requests.request("POST", url, headers=headers, data=data)
 
-    print(response_3.json())
 
     user_object = {
         'id': response.json()['id'],
         'name': user['display_name'],
         'email': user['email'],
-        'activeSessions': [],
+        'activeSessions': list(response_3.json().keys()),
         'topArtists': top_artists_response,
         'topTracks': top_tracks_response,
         'streaming': False,
