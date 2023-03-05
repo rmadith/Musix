@@ -86,11 +86,11 @@ def addUser(email, access_token, refresh_token):
     except:
         return False
     
-def getUser(id):
+def getUser(ides):
     """
     Gets a user from the database
     """
-    return getDB()["User"].find_one({"_id": id})
+    return getDB()["User"].find_one({"_id": ides})
 
 def getUsersinSession(session_id):
     """
