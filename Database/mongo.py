@@ -34,23 +34,47 @@ def addUserToSession(session_id, user_id):
     """
     Adds a user to a session
     """
+
+    print("------------------")
+    print("Session ID",session_id)
+    print("User ID",user_id)
+
     try:    
+        print("In the Try Catch")
         session_collection = getDB()["Session"]
+        
+        print("Session Collection")
+
         # Get the users array
         users = session_collection.find_one({"_id": ObjectId(session_id)})["users"]
         hostid = session_collection.find_one({"_id": ObjectId(session_id)})["host"]
         theme = session_collection.find_one({"_id": ObjectId(session_id)})["type"]
-        print(users)
         host = getUser(hostid)["name"]
+
+        print("Users",users)
+        print( "Host ID",hostid)
+        print("Theme",theme)
+        print("Host",host)
+        print("------------------")
+
         # Add the user to the array
         users[user_id] = True
+
+        print("Users",users)
+
         user = getUser(user_id)
-        print("user")
+
+        print("User1",user)
+
         user["activeSessions"][session_id] = True
-        print("Bye")
+
+        print("User2",user)
+
         getDB()["User"].update_one({"_id": ObjectId(user_id)}, {"$set": {"activeSessions": user["activeSessions"]}})
-        print("Hello")
         session_collection.update_one({"_id": ObjectId(session_id)}, {"$set": {"users": users}})
+
+        print("Session Collection Updated")
+
         return {"host": host, "theme": theme}
     except Exception as e:
         return False
