@@ -2,9 +2,10 @@ import json
 import sys
 import time
 
-sys.path.insert(0, "/home/muthu/Musix/Algorithm")
+sys.path.append("/home/muthu/Musix/Algorithm")
 import HashedQueue
 import Song
+
 from . import Spotify
 import threading
 from flask import (Blueprint, request)
