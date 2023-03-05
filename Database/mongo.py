@@ -78,6 +78,9 @@ def addUserToSession(session_id, user_id):
         session_collection.update_one({"_id": ObjectId(session_id)}, {"$set": {"users": users}})
 
         print("Session Collection Updated")
+        print("host",host)
+        print("theme",theme)
+        print("------------------")
 
         return {"host": host, "theme": theme}
     except Exception as e:
