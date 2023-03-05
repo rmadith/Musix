@@ -71,6 +71,7 @@ def addUserToSession():
     try:
         x = mongo.addUserToSession(data["session_id"], data["user_id"])
         y = mongo.getUser(data["user_id"])
+        print(y)
         print( {"id": str(x)})
         playlist = Spotify.getplaylist( y["access_token"], data["type_id"])
         print(playlist)
