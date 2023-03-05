@@ -65,18 +65,24 @@ def createsession():
 @bp.route('/addUserToSession', methods=['PUT'])
 def addUserToSession():
     data = request.json
+
+    print("------------------")
+    print(data)
     try:
         x = mongo.addUserToSession(data["session_id"], data["user_id"])
         print( {"id": str(x)})
         playlist = Spotify.getplaylist( y["access_token"], data["type_id"])
+        print(playlist)
         for song in playlist["tracks"]["items"]:
             name = song["track"]["album"]["name"]
             trackId = song["track"]["uri"]
             image = song["track"]["album"]["images"][0]["url"]
             supremeHash[str(data["session_id"])].add(Song.Song(name, trackId, image,0))
         
+        print("returning")
         return {"creatorName": x["host"], "theme": x["theme"]}
     except:
+        print("I died")
         return {"id":400}
     
 
