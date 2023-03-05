@@ -41,7 +41,7 @@ def login():
 
     data['grant_type'] = 'authorization_code'
     data['code'] = code
-    data['redirect_uri'] = 'http://localhost:3000/login'
+    data['redirect_uri'] = 'https://musix-two.vercel.app/login'
 
     r = requests.post(url, headers=headers, data=data)
 
@@ -65,6 +65,6 @@ def login():
     expire_date = expire_date + datetime.timedelta(days=90)
 
     resp = make_response()
-    resp.set_cookie('somecookiename', 'I am cookie', expires=expire_date)
+    resp.set_cookie('somecookiename', 'I am cookie', domain="127.0.0.1", secure=False, httponly=True, samesite="None", expires=expire_date)
 
     return resp
