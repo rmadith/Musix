@@ -68,12 +68,15 @@ def addUserToSession():
     print("top")
     print("------------------")
     print(data)
-    print("Size of data",data.length)
     try:
         x = mongo.addUserToSession(data["session_id"], data["user_id"])
         y = mongo.getUser(data["user_id"])
         print(y)
         print( {"id": str(x)})
+        try:
+            z = data["type_id"]
+        except:
+            z = x["theme"]
         playlist = Spotify.getplaylist( y["access_token"], data["type_id"])
         print(playlist)
         for song in playlist["tracks"]["items"]:
